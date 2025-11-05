@@ -164,9 +164,11 @@ BERTopic is an unsupervised machine learning (ML)-driven topic modeling techniqu
 
 For this project, all raw text data from **patient**, **visitor**, and **staff** surveys were consolidated into a single dataframe. Stop words (e.g., “the,” “at,” “an”) were removed. However, some contextually insignificant words (e.g., “made,” “thing”) remained due to the limitations of standard stop-word lists.
 
-A **word cloud** visualization of the most common terms was generated after preprocessing. BERTopic was then applied to the cleaned dataset, successfully identifying critical aspects of patient and visitor experiences. For example:
+A **word cloud** visualization of the most common terms was generated after preprocessing: 
 
 <img width="552" height="285" alt="Screenshot 2025-11-04 at 4 13 39 PM" src="https://github.com/user-attachments/assets/60a3eb57-1208-40a9-b996-0ed6fbb2159d" />
+
+BERTopic was then applied to the cleaned dataset, successfully identifying critical aspects of patient and visitor experiences. For example:
 
 | Raw Text Data | Keyword Extractions (Data Representation) |
 |----------------|------------------------------------------|
@@ -175,7 +177,9 @@ A **word cloud** visualization of the most common terms was generated after prep
 
 These examples illustrate that BERTopic can identify key contextual terms—sometimes even words not explicitly present in the text (e.g., “proactive”)—through its semantic understanding from contextual embeddings.
 
-Cluster maps were generated to group recurring themes into distinct “topics,” such as **“talk_doctors_hard”** and **“information_helpful_staff.”** These clusters highlight common patterns in patient and visitor experiences.
+Cluster maps were generated to group recurring themes into distinct “topics,” such as **“talk_doctors_hard”** and **“information_helpful_staff.”** These clusters highlight common patterns in patient and visitor experiences:
+<img width="619" height="451" alt="Screenshot 2025-11-04 at 4 16 46 PM" src="https://github.com/user-attachments/assets/2dc05391-e475-4540-ba58-72e895a07181" />
+<img width="625" height="432" alt="Screenshot 2025-11-04 at 4 17 26 PM" src="https://github.com/user-attachments/assets/eb682364-be07-4913-81cf-0fda4ed832e0" />
 
 ### Cluster Summary
 
@@ -230,44 +234,74 @@ Although 78.7% of staff rated “Always” for CICARE practice, 71.5% still indi
 
 We analyzed patient (n = 195) and visitor (n = 93) survey data side-by-side, comparing closed-ended responses, free-text sentiment, and proportions of negative feedback via **proportional z-tests**.
 
-| Metric | Patient Surveys | Visitor Surveys |
-|---------|----------------|----------------|
-| Count | 195 | 93 |
-| Kindness Practiced = Yes | 91.3% | 92.4% |
-| All Information Received = Yes | 81.5% | 87.0% |
-| Staff Responsiveness Rating = 5 | 71.8% | 73.1% |
-| Follow-Up Needed | 9.2% | 8.6% |
+### Summary of Key Survey Metrics for Patient and Visitor Surveys
 
-### Sentiment Distribution — Patient Surveys
+| Metric | Patient Surveys | Family/Visitor Surveys |
+|---------|-----------------|------------------------|
+| **Count** | 195 | 93 |
+| **Kindness Practiced = “Yes”** | 91.3% | 92.4% |
+| **All Information Received = “Yes”** | 81.5% | 87.0% |
+| **Staff Responsiveness Rating** |  |  |
+| 5 | 71.8% | 73.1% |
+| 4 | 19.0% | 19.4% |
+| 3 | 5.6% | 6.5% |
+| 2 | 1.0% | 0.0% |
+| 1 | 0.5% | 2.1% |
+| **Follow Up Needed** | 9.2% | 8.6% |
+| **Free Text Comment Response Rates** |  |  |
+| Kindness Practiced | 74.6% | 79.8% |
+| All Information Received | 55.8% | 69.1% |
+| Staff Rating | 42.6% | 55.3% |
+| Additional Notes | 33.5% | 30.9% |
 
-| Prompt | Positive | Neutral | Negative |
-|---------|-----------|----------|-----------|
-| Staff Responsiveness Rating | 48% | 22% | 30% |
-| Was All Info Received | 43% | 37% | 20% |
-| Was Kindness Practiced | 46% | 34% | 19% |
+### Sentiment Distribution Across Survey Prompts for Patient Free Text Responses
 
-### Sentiment Distribution — Visitor Surveys
+| Prompt | Positive Percentage | Neutral Percentage | Negative Percentage |
+|---------|---------------------|--------------------|---------------------|
+| **Staff Responsiveness Rating** | 48% | 22% | 30% |
+| **Was All Info Received** | 43% | 37% | 20% |
+| **Was Kindness Practiced** | 46% | 34% | 19% |
 
-| Prompt | Positive | Neutral | Negative |
-|---------|-----------|----------|-----------|
-| Staff Responsiveness Rating | 66% | 24% | 10% |
-| Was All Info Received | 44% | 42% | 14% |
-| Was Kindness Practiced | 45% | 44% | 11% |
 
-### Closed-Ended Response Comparison (Proportional z-Test)
+### Sentiment Distribution Across Survey Prompts for Visitor Free Text Responses
+
+| Prompt | Positive Percentage | Neutral Percentage | Negative Percentage |
+|---------|---------------------|--------------------|---------------------|
+| **Staff Responsiveness Rating** | 66% | 24% | 10% |
+| **Was All Info Received** | 44% | 42% | 14% |
+| **Was Kindness Practiced** | 45% | 44% | 11% |
+
+
+### Closed-Ended Response Comparison (Proportional z-Test for Negative Responses)
 
 | Question | z-statistic | p-value | Significance |
 |-----------|-------------|----------|---------------|
 | Was Kindness Practiced | 0.316 | 0.752 | Not significant |
 | Was All Info Received | 1.169 | 0.242 | Not significant |
 
-### Free-Text Sentiment Comparison (Proportional z-Test)
+### Free-Text Sentiment Comparison (Proportional z-Test for Negative Sentiment)
 
 | Question | z-statistic | p-value | Significance |
 |-----------|-------------|----------|---------------|
 | Staff Responsiveness Rating | 2.706 | 0.007 | **Significant** |
 | Was All Info Received | 0.998 | 0.318 | Not significant |
 | Was Kindness Practiced | 1.518 | 0.129 | Not significant |
+
+### Graphs
+<img width="569" height="422" alt="Screenshot 2025-11-04 at 4 26 37 PM" src="https://github.com/user-attachments/assets/70a4ad3d-0357-465c-bba8-78eec3d87fbc" />
+These visualizations show survey respondent counts and percentages, categorized by visitor or patient status, and response sentiment.
+
+<img width="480" height="346" alt="Screenshot 2025-11-04 at 4 27 20 PM" src="https://github.com/user-attachments/assets/ee870654-f920-4bb3-9d7a-bd8fcd167de3" />
+These visualizations above show survey respondent counts and percentages by UCLA the different Health facilities, categorized by response sentiment.
+
+<img width="574" height="396" alt="Screenshot 2025-11-04 at 4 28 20 PM" src="https://github.com/user-attachments/assets/cc4846ef-8899-46a4-878a-526aac0249af" />
+These visualizations show the counts and percentages of positive, neutral, and negative responses to each survey prompt.
+
+<img width="561" height="362" alt="Screenshot 2025-11-04 at 4 28 58 PM" src="https://github.com/user-attachments/assets/2cd4a27e-ac90-425f-96d1-a684b53a7af3" />
+These visualization shows the number of positive, neutral, and negative responses to each survey prompt for each UCLA Health facility.
+
+<img width="617" height="288" alt="Screenshot 2025-11-04 at 4 29 24 PM" src="https://github.com/user-attachments/assets/4985daee-32d4-499d-aa8a-9ccded20a056" />
+These visualization shows the number of positive, neutral, and negative responses to each survey prompt that received at least five responses, for each UCLA Health facility.
 
 ### Discussion
 
