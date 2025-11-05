@@ -1,0 +1,13 @@
+pandas>=1.4
+numpy>=1.21
+scikit-learn>=1.0
+transformers>=4.30
+torch>=1.12
+sentence-transformers>=2.2
+bertopic>=0.13
+spacy>=3.5
+matplotlib>=3.5
+seaborn>=0.11
+jupyterlab
+pytest
+tqdm
