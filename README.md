@@ -5,6 +5,7 @@ Patient experience surveys are essential for evaluating hospital quality but are
 
 #### Data Structure
 Due to HIPAA constraints and the inability to take data out of the UCLA Health ULEAD Platform, this repository contains only **dummy data** to demonstrate the pipeline.  
+
 The included code reflects the **generalized framework and workflow** used for analysis, but the **specific pipeline and proprietary data used within UCLA Health are not shared** in this repository.
 
 ## Background
