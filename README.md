@@ -294,18 +294,23 @@ We analyzed patient (n = 195) and visitor (n = 93) survey data side-by-side, com
 
 ### Graphs
 <img width="569" height="422" alt="Screenshot 2025-11-04 at 4 26 37 PM" src="https://github.com/user-attachments/assets/70a4ad3d-0357-465c-bba8-78eec3d87fbc" />
+
 These visualizations show survey respondent counts and percentages, categorized by visitor or patient status, and response sentiment.
 
 <img width="480" height="346" alt="Screenshot 2025-11-04 at 4 27 20 PM" src="https://github.com/user-attachments/assets/ee870654-f920-4bb3-9d7a-bd8fcd167de3" />
+
 These visualizations above show survey respondent counts and percentages by UCLA the different Health facilities, categorized by response sentiment.
 
 <img width="574" height="396" alt="Screenshot 2025-11-04 at 4 28 20 PM" src="https://github.com/user-attachments/assets/cc4846ef-8899-46a4-878a-526aac0249af" />
+
 These visualizations show the counts and percentages of positive, neutral, and negative responses to each survey prompt.
 
 <img width="561" height="362" alt="Screenshot 2025-11-04 at 4 28 58 PM" src="https://github.com/user-attachments/assets/2cd4a27e-ac90-425f-96d1-a684b53a7af3" />
+
 These visualization shows the number of positive, neutral, and negative responses to each survey prompt for each UCLA Health facility.
 
 <img width="617" height="288" alt="Screenshot 2025-11-04 at 4 29 24 PM" src="https://github.com/user-attachments/assets/4985daee-32d4-499d-aa8a-9ccded20a056" />
+
 These visualization shows the number of positive, neutral, and negative responses to each survey prompt that received at least five responses, for each UCLA Health facility.
 
 ### Discussion
