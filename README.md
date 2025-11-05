@@ -154,4 +154,176 @@ Significance was tested at \( \alpha = 0.05 \). This analysis identifies statist
 
 **Overall**, this pipeline — integrating RoBERTa, BERT, and BERTopic — provides an efficient, scalable, and ethically grounded framework for automating sentiment analysis of UCLA Health’s patient experience surveys.
 
+---
+
+# Results
+
+## BERTopic
+
+BERTopic is an unsupervised machine learning (ML)-driven topic modeling technique that leverages transformer-based NLP models called **BERT** (Bidirectional Encoder Representations of Transformers). BERTopic processes text bidirectionally—both left-to-right and right-to-left—and supports a modular framework that can incorporate manual expert labels, enabling semi-supervised modeling.
+
+For this project, all raw text data from **patient**, **visitor**, and **staff** surveys were consolidated into a single dataframe. Stop words (e.g., “the,” “at,” “an”) were removed. However, some contextually insignificant words (e.g., “made,” “thing”) remained due to the limitations of standard stop-word lists.
+
+A **word cloud** visualization of the most common terms was generated after preprocessing. BERTopic was then applied to the cleaned dataset, successfully identifying critical aspects of patient and visitor experiences. For example:
+
+<img width="552" height="285" alt="Screenshot 2025-11-04 at 4 13 39 PM" src="https://github.com/user-attachments/assets/60a3eb57-1208-40a9-b996-0ed6fbb2159d" />
+
+| Raw Text Data | Keyword Extractions (Data Representation) |
+|----------------|------------------------------------------|
+| “It is hard to see the doctors and usually they are rushing when they talk to me.” | [doctors, talk, hard, seemed, see, thing, little, wait, everything, dr] |
+| “The staff have been very helpful and provides all the information.” | [information, helpful, staff, questions, proactive, day, everyone, ask, yes] |
+
+These examples illustrate that BERTopic can identify key contextual terms—sometimes even words not explicitly present in the text (e.g., “proactive”)—through its semantic understanding from contextual embeddings.
+
+Cluster maps were generated to group recurring themes into distinct “topics,” such as **“talk_doctors_hard”** and **“information_helpful_staff.”** These clusters highlight common patterns in patient and visitor experiences.
+
+### Cluster Summary
+
+| Cluster | Percent | Theme |
+|----------|----------|-------|
+| 1_nurses_team_here | 12.6% | Nurses and care team experiences |
+| 0_doctors_me_are | 12.6% | Doctor interactions and communication |
+| 3_they_questions_answer | 9.3% | Responsiveness and answering patient questions |
+| 4_great_nothing_it | 8.6% | Positive general feedback (“great experience”) |
+| -1_and_is_to | 8.6% | Miscellaneous or low-coherence cluster |
+| 2_the_to_wait | 8.0% | Wait times and scheduling issues |
+| 6_care_kind_and | 6.3% | Compassionate and kind care |
+| 5_staff_friendly_very | 5.9% | Friendly and professional staff interactions |
+| 9_no_thanks_thanks | 5.1% | Expressions of gratitude and satisfaction |
+| 11_always_visits_they | 5.1% | Consistency across patient visits |
+| 7_surgery_the_didn | 4.8% | Surgical experiences and concerns |
+| 8_md_mds_ava | 4.8% | Physician availability and attentiveness |
+| 10_she_nurse_her | 3.2% | Nurse-specific mentions |
+| 12_10_explanation_to | 2.7% | Clarity and thoroughness of explanations |
+| 13_ucla_first_is | 2.3% | First impressions of UCLA Health services |
+
+These clusters provide a structured overview of recurring themes across UCLA Health survey data, emphasizing communication, compassion, and operational aspects such as wait times.
+
+### Limitations and Future Work
+While BERTopic effectively reduces manual review time for large volumes of text data, its accuracy can be improved by incorporating **manual labels from clinicians and operations staff**. Integrating domain-specific vocabulary—such as CICARE-related terminology—can also enhance interpretability and contextual precision.
+
+---
+
+## Sentiment Analysis
+
+Although initial analysis was planned for only **patient** and **visitor** surveys, the scope was expanded to include **staff survey data** as well.
+
+### Staff Survey Summary
+
+| Metric | Count / Percentage |
+|---------|-------------------|
+| Total Surveys | 1,166 |
+| Opportunities for Improvement = True | 81.4% |
+| Resources Needed for Role = True | 83.4% |
+| Resources Needed Listed | 14.1% |
+| CICARE Practice Rating = 4 (Always) | 78.7% |
+| CICARE Practice Rating = 3 (Usually) | 17.7% |
+| CICARE Practice Rating = 2 (Sometimes) | 2.9% |
+| CICARE Practice Rating = 1 (Never) | 0.7% |
+| Need Follow-Up = True | 71.5% |
+
+Although 78.7% of staff rated “Always” for CICARE practice, 71.5% still indicated a need for follow-up, suggesting that high self-ratings coexist with unmet needs or improvement opportunities.
+
+---
+
+### Patient and Visitor Surveys
+
+We analyzed patient (n = 195) and visitor (n = 93) survey data side-by-side, comparing closed-ended responses, free-text sentiment, and proportions of negative feedback via **proportional z-tests**.
+
+| Metric | Patient Surveys | Visitor Surveys |
+|---------|----------------|----------------|
+| Count | 195 | 93 |
+| Kindness Practiced = Yes | 91.3% | 92.4% |
+| All Information Received = Yes | 81.5% | 87.0% |
+| Staff Responsiveness Rating = 5 | 71.8% | 73.1% |
+| Follow-Up Needed | 9.2% | 8.6% |
+
+### Sentiment Distribution — Patient Surveys
+
+| Prompt | Positive | Neutral | Negative |
+|---------|-----------|----------|-----------|
+| Staff Responsiveness Rating | 48% | 22% | 30% |
+| Was All Info Received | 43% | 37% | 20% |
+| Was Kindness Practiced | 46% | 34% | 19% |
+
+### Sentiment Distribution — Visitor Surveys
+
+| Prompt | Positive | Neutral | Negative |
+|---------|-----------|----------|-----------|
+| Staff Responsiveness Rating | 66% | 24% | 10% |
+| Was All Info Received | 44% | 42% | 14% |
+| Was Kindness Practiced | 45% | 44% | 11% |
+
+### Closed-Ended Response Comparison (Proportional z-Test)
+
+| Question | z-statistic | p-value | Significance |
+|-----------|-------------|----------|---------------|
+| Was Kindness Practiced | 0.316 | 0.752 | Not significant |
+| Was All Info Received | 1.169 | 0.242 | Not significant |
+
+### Free-Text Sentiment Comparison (Proportional z-Test)
+
+| Question | z-statistic | p-value | Significance |
+|-----------|-------------|----------|---------------|
+| Staff Responsiveness Rating | 2.706 | 0.007 | **Significant** |
+| Was All Info Received | 0.998 | 0.318 | Not significant |
+| Was Kindness Practiced | 1.518 | 0.129 | Not significant |
+
+### Discussion
+
+Patients and visitors expressed similar sentiments regarding kindness and general satisfaction. However, **visitors provided more detailed feedback** about communication and staff responsiveness—areas that directly affect family involvement in care. These findings suggest that enhancing information-sharing and responsiveness toward visitors could further improve overall patient experience outcomes.
+
+---
+
+## Named Entity Recognition (NER)
+
+We applied **BERT Named Entity Recognition (NER)** to identify named persons and organizations within survey comments. BERT NER classifies entities into four categories: **Person (PER)**, **Organization (ORG)**, **Location (LOC)**, and **Miscellaneous (MISC)**.
+
+### Observations
+The base BERT NER model occasionally misclassified entities (e.g., “Kaiser” labeled as a person). To improve classification accuracy, we analyzed the model’s output weights and introduced threshold-based refinements.
+
+| Class Label | Comment 130 (two named persons) | Comment 4 (named organization) |
+|--------------|-------------------------------|--------------------------------|
+| O | -0.93 | 0.01 |
+| B-MISC | -0.88 | 0.37 |
+| I-MISC | -2.42 | -3.15 |
+| B-PER | **8.93** | **7.33** |
+| I-PER | -1.96 | -1.90 |
+| B-ORG | -0.26 | 0.74 |
+| I-ORG | -2.89 | -3.20 |
+| B-LOC | -0.18 | -0.20 |
+| I-LOC | -2.36 | -2.61 |
+
+### Threshold Tuning
+
+| Threshold (T) & Solution | B-PER + I-PER Count | B-PER + I-PER Percent |
+|---------------------------|--------------------|-----------------------|
+| Solution 1 | 13 | 2.73% |
+| Solution 2, T = 8 | 17 | 3.57% |
+| Solution 2, T = 10 | 19 | **4.00%** |
+| Solution 2, T = 12 | 21 | 4.42% |
+
+Further breakdown of B-PER and I-PER counts:
+
+| Threshold (T) & Solution | B-PER Count | B-PER % | I-PER Count | I-PER % |
+|---------------------------|--------------|----------|--------------|----------|
+| Solution 2, T = 8 | 13 | 2.73% | 4 | 0.84% |
+| Solution 2, T = 10 | 15 | 3.15% | 4 | 0.84% |
+| Solution 2, T = 12 | 17 | 3.57% | 4 | 0.84% |
+
+The **T = 10% threshold** produced the most balanced differentiation of person vs. organization entities. This threshold-based adjustment reduced false positives such as “Kaiser” (ORG misclassified as PER) while maintaining sensitivity.
+
+### Future Directions
+Potential improvements include:
+- Incorporating **domain-specific models** such as BioBERT or ClinicalBERT  
+- Implementing **contextual word embedding augmentation (CWEA)** to expand labeled data  
+- Leveraging **gazetteers** and **rule-based filters** for domain-specific correction  
+- Fine-tuning transformer layers for higher recall and precision on healthcare-specific text
+
+These steps would enhance the accuracy and adaptability of the NER pipeline for hospital survey data.
+
+---
+
+
+
 
