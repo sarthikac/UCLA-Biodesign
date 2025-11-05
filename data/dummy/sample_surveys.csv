@@ -1,0 +1,4 @@
+survey_id,respondent_type,hospital,department,prompt,response,rating
+1,patient,Ronald Reagan,ICU,Was Kindness Practiced?,"The nurses were very caring and kind.",5
+2,visitor,Ronald Reagan,ER,Was All Information Received?,"They explained most things but parking was terrible.",4
+3,patient,CLAH,CAFE,Staff Responsiveness Rating,"I waited a long time to be seen.",2
