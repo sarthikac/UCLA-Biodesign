@@ -3,6 +3,10 @@
 ## Problem Statement
 Patient experience surveys are essential for evaluating hospital quality but are currently limited by manual review and inefficiency. This project aims to develop a scalable, automated way to extract insights from hospital and departmental patient experience surveys using sentiment analysis.
 
+#### Data Structure
+Due to HIPAA constraints and the inability to take data out of the UCLA Health ULEAD Platform, this repository contains only **dummy data** to demonstrate the pipeline.  
+The included code reflects the **generalized framework and workflow** used for analysis, but the **specific pipeline and proprietary data used within UCLA Health are not shared** in this repository.
+
 ## Background
 Patient experience is a key indicator of clinical quality and a determinant of hospital reimbursement through the CMS HCAHPS survey. However, HCAHPS has several limitations, including low response rates, sampling bias, mode effects, and an inability to fully capture patient sentiment. Free-text responses such as complaints and comments offer richer insights but are resource-intensive to analyze manually.
 
