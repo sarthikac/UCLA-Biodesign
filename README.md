@@ -3,7 +3,7 @@
 ## Problem Statement
 Patient experience surveys are essential for evaluating hospital quality but are currently limited by manual review and inefficiency. This project aims to develop a scalable, automated way to extract insights from hospital and departmental patient experience surveys using sentiment analysis.
 
-#### Data Structure
+#### Data Constraints
 Due to HIPAA constraints and the inability to take data out of the UCLA Health ULEAD Platform, this repository contains only **dummy data** to demonstrate the pipeline.  
 
 The included code reflects the **generalized framework and workflow** used for analysis, but the **specific pipeline and proprietary data used within UCLA Health are not shared** in this repository.
