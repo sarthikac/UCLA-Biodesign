@@ -1,23 +1,53 @@
-# Cell 1: Imports
-from src.preprocess import load_data
-from src.sentiment_model import run_sentiment_analysis
-from src.topic_model import run_topic_modeling
-from src.ner_model import run_ner
+"""
+main_pipeline.py
+---------------
+End-to-end NLP pipeline for sentiment analysis, topic modeling, and entity recognition
+on anonymized hospital survey text data using RoBERTa, BERTopic, and BERT NER.
+
+NOTE:
+This version uses dummy data to demonstrate the workflow.
+No real UCLA Health data is included.
+"""
+
 import pandas as pd
+from transformers import pipeline
+from bertopic import BERTopic
 
-# Cell 2: Load data
-df = load_data("data/sample_survey_data.csv")
+# --- Dummy survey data (replace with actual data in secure environments) ---
+data = {
+    "comment": [
+        "The nurses were so kind and attentive.",
+        "Doctor was in a rush and didn’t answer my questions.",
+        "Everyone was friendly and helpful at check-in.",
+        "Wait times were long but care was great overall.",
+    ]
+}
 
-# Cell 3: Sentiment analysis
-df_sent = run_sentiment_analysis(df)
+df = pd.DataFrame(data)
 
-# Cell 4: Topic modeling
-df_topic, topic_info = run_topic_modeling(df_sent)
+# --- Step 1: Sentiment Analysis (RoBERTa) ---
+print("Running sentiment analysis...")
+sentiment_model = pipeline("sentiment-analysis", model="cardiffnlp/twitter-roberta-base-sentiment-latest")
+sentiments = sentiment_model(df["comment"].tolist())
+df["sentiment"] = [s["label"] for s in sentiments]
+df["sentiment_score"] = [s["score"] for s in sentiments]
 
-# Cell 5: NER
-ner_results = run_ner(df_topic)
+# --- Step 2: Topic Modeling (BERTopic) ---
+print("Generating topics...")
+topic_model = BERTopic(verbose=True)
+topics, probs = topic_model.fit_transform(df["comment"])
+df["topic"] = topics
 
-# Cell 6: Save results
-df_topic.to_csv("results/sample_survey_results.csv", index=False)
-print("Pipeline complete. Results saved to /results/")
+# --- Step 3: Named Entity Recognition (BERT) ---
+print("Extracting named entities...")
+ner_model = pipeline("ner", grouped_entities=True)
+ner_results = [ner_model(text) for text in df["comment"]]
+df["entities"] = ner_results
 
+# --- Display final output ---
+print("\n--- Final Annotated Data ---")
+print(df)
+
+# --- Optionally, save results ---
+df.to_csv("outputs/annotated_dummy_results.csv", index=False)
+print("\nResults saved to outputs/annotated_dummy_results.csv")
